@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Spider-Man Multiverso 🕷️</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:wght@400;700&display=swap');
+
+    :root {
+      --rosso: #ff1e1e;
+      --blu: #0044ff;
+      --giallo: #ffdd00;
+      --nero: #111;
+      --bianco: #fff;
+    }
+    * { box-sizing: border-box; margin:0; padding:0 }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: radial-gradient(circle at top, var(--blu), var(--nero));
+      color: var(--bianco);
+      overflow-x: hidden;
+    }
+    header {
+      background: var(--rosso);
+      color: var(--bianco);
+      padding: 1rem;
+      text-align: center;
+      font-family: 'Bangers', cursive;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 0 var(--nero);
+      position: sticky; top:0; z-index:100;
+    }
+    header span { color: var(--giallo); }
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem;
+      animation: fadeIn 2s ease;
+    }
+    .hero h1 {
+      font-family: 'Bangers', cursive;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--giallo);
+      text-shadow: 3px 3px 0 var(--nero);
+    }
+    .hero img {
+      max-width: 300px;
+      animation: swing 3s infinite alternate ease-in-out;
+    }
+    @keyframes swing {
+      from { transform: rotate(-8deg) translateY(0); }
+      to { transform: rotate(8deg) translateY(10px); }
+    }
+    section {
+      padding: 2rem;
+      margin: 1rem auto;
+      max-width: 900px;
+      background: rgba(0,0,0,0.6);
+      border: 3px solid var(--rosso);
+      border-radius: 12px;
+      box-shadow: 0 0 20px var(--rosso);
+    }
+    section h2 {
+      font-family: 'Bangers', cursive;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--giallo);
+      text-shadow: 2px 2px 0 var(--nero);
+    }
+    .movies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+      gap: 1rem;
+    }
+    .movie {
+      background: var(--rosso);
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+      box-shadow: 3px 3px 0 var(--nero);
+      transition: transform .2s;
+    }
+    .movie:hover { transform: scale(1.1) rotate(-2deg); }
+    ul { list-style: none; }
+    ul li::before { content:"🕸️ "; }
+    form input, form textarea {
+      width:100%;padding:.6rem;margin-bottom:.5rem;
+      border-radius:8px;border:2px solid var(--rosso);
+      font-family:inherit;font-size:1rem;
+    }
+    form button {
+      background: var(--rosso);
+      color: var(--bianco);
+      font-family:'Bangers', cursive;
+      font-size:1.2rem;
+      padding:.5rem 1.2rem;
+      border:none;border-radius:8px;
+      cursor:pointer;
+      box-shadow:2px 2px 0 var(--nero);
+    }
+    form button:hover { background: var(--giallo); color: var(--nero); }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: .9rem;
+      background: var(--nero);
+      color: var(--bianco);
+    }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  </style>
+</head>
+<body>
+
+  <header>
+    🕷️ <span>Spider-Man</span> Multiverso
+  </header>
+
+  <div class="hero">
+    <h1>Benvenuto nel Multiverso!</h1>
+    <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Spiderman50.jpg" alt="Spider-Man">
+    <p>Scopri i mondi, i film e i poteri del tuo amichevole supereroe di quartiere.</p>
+  </div>
+
+  <section id="about">
+    <h2>Chi è Spider-Man</h2>
+    <p>Peter Parker, Miles Morales, Gwen Stacy... tanti Spider-People da tanti universi diversi!  
+    Un grande potere porta con sé grandi responsabilità.</p>
+  </section>
+
+  <section id="movies">
+    <h2>Film e Avventure</h2>
+    <div class="movies-grid" id="movies-grid"></div>
+  </section>
+
+  <section id="powers">
+    <h2>Poteri</h2>
+    <ul>
+      <li>Forza sovrumana</li>
+      <li>Senso di ragno</li>
+      <li>Arrampicata sui muri</li>
+      <li>Ragnatele high-tech</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Scrivi a Spider-Man</h2>
+    <form id="contact-form">
+      <input type="text" name="name" placeholder="Il tuo nome" required>
+      <input type="email" name="email" placeholder="La tua email" required>
+      <textarea name="message" rows="4" placeholder="Il tuo messaggio per Spider-Man" required></textarea>
+      <button type="submit">Invia 🕸️</button>
+      <p id="status"></p>
+    </form>
+  </section>
+
+  <footer>
+    © <span id="year"></span> Spider-Man Multiverso (Fan-site non ufficiale)
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Film di esempio
+    const movies = [
+      {title:"Spider-Man: Into the Spider-Verse", year:2018},
+      {title:"Spider-Man: Across the Spider-Verse", year:2023},
+      {title:"Spider-Man: No Way Home", year:2021},
+      {title:"Spider-Man 2 (PS5 Game)", year:2023}
+    ];
+
+    const grid = document.getElementById("movies-grid");
+    movies.forEach(m=>{
+      const el=document.createElement("div");
+      el.className="movie";
+      el.innerHTML=`<h3>${m.title}</h3><p>${m.year}</p>`;
+      grid.appendChild(el);
+    });
+
+    // Form simulato
+    document.getElementById("contact-form").addEventListener("submit",e=>{
+      e.preventDefault();
+      document.getElementById("status").textContent="🕸️ Messaggio spedito a Spider-Man!";
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
