@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spider-Verse Esplosivo 🕷️</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rosso:#ff2b2b;
+  --blu:#0ea5ff;
+  --giallo:#fff04a;
+  --nero:#070707;
+  --bianco:#ffffff;
+  --glass: rgba(255,255,255,0.03);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Montserrat',sans-serif;background:#0a0a12;color:var(--bianco);overflow-x:hidden;position:relative;}
+header{position:sticky;top:0;z-index:99;background:linear-gradient(90deg,#0a0a12,#1a1a28);padding:10px 0;border-bottom:2px solid var(--rosso);}
+header .brand{display:flex;align-items:center;gap:12px;justify-content:center;}
+header .brand img{height:60px;width:60px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.7);}
+header .brand h1{font-family:'Bangers',cursive;font-size:36px;color:var(--giallo);text-shadow:2px 2px var(--nero);}
+nav{display:flex;justify-content:center;gap:16px;margin-top:8px;}
+nav a{color:var(--bianco);text-decoration:none;font-weight:600;padding:6px 12px;border-radius:8px;transition:0.2s;}
+nav a:hover{background:rgba(255,255,255,0.05);}
+.hero{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:20px;margin:20px;}
+.hero img{width:300px;animation:swing 2s infinite alternate;}
+@keyframes swing{from{transform:rotate(-10deg);} to{transform:rotate(10deg);}}
+.hero h2{font-family:'Bangers',cursive;font-size:48px;color:var(--giallo);text-shadow:2px 2px var(--nero);}
+.section{max-width:1000px;margin:20px auto;padding:20px;background:var(--glass);border-radius:16px;border:2px solid rgba(255,255,255,0.05);position:relative;}
+.section h3{font-family:'Bangers',cursive;color:var(--rosso);margin-bottom:12px;}
+.movies-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;}
+.movie-card{background:var(--blu);padding:12px;border-radius:12px;text-align:center;color:var(--bianco);font-weight:700;transition:0.3s;box-shadow:4px 4px 0 var(--nero);}
+.movie-card:hover{transform:scale(1.1) rotate(-3deg);background:var(--rosso);}
+form input, form textarea, form select, form button{width:100%;padding:10px;margin:6px 0;border-radius:10px;border:none;font-family:inherit;}
+form button{background:var(--giallo);color:var(--nero);font-weight:800;cursor:pointer;position:relative;overflow:hidden;}
+form button:active::after{content:"BANG!";position:absolute;top:-10px;left:50%;transform:translateX(-50%);padding:4px 10px;border-radius:12px;background:var(--rosso);color:var(--bianco);animation:bang 0.5s forwards;}
+@keyframes bang{from{opacity:1;transform:translateX(-50%) scale(1);} to{opacity:0;transform:translateX(-50%) scale(2);}}
+.comic-burst{position:absolute;pointer-events:none;z-index:100;font-family:'Bangers',cursive;color:var(--rosso);font-size:28px;text-shadow:2px 2px var(--nero);}
+footer{text-align:center;padding:12px;margin-top:20px;border-top:2px solid var(--rosso);}
+canvas#bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;}
+canvas#webs{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+<canvas id="webs"></canvas>
+
+<header>
+  <div class="brand">
+    <img src="occhioni.jpg" alt="Logo Spider-Man">
+    <h1>Spider-Verse</h1>
+  </div>
+  <nav>
+    <a href="#about">Chi è</a>
+    <a href="#movies">Film</a>
+    <a href="#config">Costume</a>
+    <a href="#contact">Contatti</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <h2>Benvenuto nel Multiverso!</h2>
+    <p>Configura il tuo Spider-Man, lancia fumetti esplosivi e suoni THWIP!</p>
+    <button class="btn" id="thwip-btn">Lancia Ragnatela 🕸️</button>
+  </div>
+  <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Spiderman50.jpg" alt="Spider-Man">
+</section>
+
+<section class="section" id="about">
+<h3>Chi è Spider-Man?</h3>
+<p>Peter Parker, Miles Morales, Gwen Stacy e molti altri. Ogni universo ha il suo Spider-Man con poteri incredibili!</p>
+</section>
+
+<section class="section" id="movies">
+<h3>Film & Avventure</h3>
+<div class="movies-grid" id="movies-grid"></div>
+</section>
+
+<section class="section" id="config">
+<h3>Configura il tuo Spider-Man</h3>
+<form id="suit-form">
+<select id="main-color"><option value="#ff2b2b">Rosso</option><option value="#0ea5ff">Blu</option><option value="#00ff99">Verde</option></select>
+<select id="sec-color"><option value="#000000">Nero</option><option value="#ffffff">Bianco</option><option value="#ffe600">Giallo</option></select>
+<button class="btn" type="submit">Applica Costume</button>
+</form>
+<img id="suit-preview" src="https://upload.wikimedia.org/wikipedia/en/0/0c/Spiderman50.jpg" style="width:280px;margin-top:12px;display:block;">
+</section>
+
+<section class="section" id="contact">
+<h3>Contattaci</h3>
+<form id="contact-form">
+<input type="text" name="name" placeholder="Nome" required>
+<input type="email" name="email" placeholder="Email" required>
+<textarea name="message" placeholder="Messaggio" required></textarea>
+<button class="btn" type="submit">INVIA 💥</button>
+<p id="status"></p>
+</form>
+</section>
+
+<footer>
+<p>© <span id="year"></span> Spider-Verse Fan Project</p>
+</footer>
+
+<script>
+// Anno
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// Film demo
+const movies=[{title:"Into the Spider-Verse",year:2018},{title:"Across the Spider-Verse",year:2023},{title:"No Way Home",year:2021},{title:"Spider-Man 2",year:2023}];
+const grid=document.getElementById("movies-grid");
+movies.forEach(m=>{
+  const el=document.createElement("div");
+  el.className="movie-card";
+  el.innerHTML=`<h4>${m.title}</h4><p>${m.year}</p>`;
+  grid.appendChild(el);
+});
+
+// Contact form
+document.getElementById("contact-form").addEventListener("submit",e=>{
+  e.preventDefault();
+  document.getElementById("status").textContent="🕸️ Messaggio lanciato tra le ragnatele!";
+  e.target.reset();
+});
+
+// Costume configurator
+document.getElementById("suit-form").addEventListener("submit",e=>{
+  e.preventDefault();
+  const main=document.getElementById("main-color").value;
+  const sec=document.getElementById("sec-color").value;
+  const suit=document.getElementById("suit-preview");
+  suit.style.filter=`drop-shadow(0 0 20px ${main}) drop-shadow(0 0 10px ${sec})`;
+});
+
+// Lancia fumetto THWIP
+document.getElementById("thwip-btn").addEventListener("click",e=>{
+  const burst=document.createElement("div");
+  burst.className="comic-burst";
+  burst.textContent="THWIP!";
+  burst.style.left = e.pageX+"px";
+  burst.style.top = e.pageY+"px";
+  document.body.appendChild(burst);
+  const audio=new Audio("https://freesound.org/data/previews/528/528182_9216400-lq.mp3");
+  audio.volume=0.5; audio.play();
+  setTimeout(()=>burst.remove(),800);
+});
+
+// Sfondo stellato
+const c=document.getElementById("bg");
+c.width=window.innerWidth;c.height=window.innerHeight;
+const ctx=c.getContext("2d");
+let stars=[];
+for(let i=0;i<250;i++){stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2+1,speed:Math.random()*0.5})}
+function animateStars(){
+  ctx.fillStyle="#0a0a12";ctx.fillRect(0,0,c.width,c.height);
+  ctx.fillStyle="#fff";
+  stars.forEach(s=>{
+    ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();
+    s.y-=s.speed;if(s.y<0)s.y=c.height;
+  });
+  requestAnimationFrame(animateStars);
+}
+animateStars();
+
+// Ragnatele animate
+const webCanvas=document.getElementById("webs");
+webCanvas.width=window.innerWidth; webCanvas.height=window.innerHeight;
+const wctx=webCanvas.getContext("2d");
+let webs=[];
+for(let i=0;i<15;i++){webs.push({x:Math.random()*wctx.canvas.width,y:Math.random()*-400+Math.random()*-800,length:Math.random()*300+100})}
+function animateWebs(){
+  wctx.clearRect(0,0,wctx.canvas.width,wctx.canvas.height);
+  wctx.strokeStyle="rgba(255,255,255,0.3)";
+  wctx.lineWidth=2;
+  webs.forEach(w=>{
+    wctx.beginPath();
+    wctx.moveTo(w.x,w.y);
+    wctx.lineTo(w.x,w.y+w.length);
+    wctx.stroke();
+    w.y+=1.2;
+    if(w.y>wctx.canvas.height) w.y=-Math.random()*500;
+  });
+  requestAnimationFrame(animateWebs);
+}
+animateWebs();
+</script>
+</body>
+</html>
